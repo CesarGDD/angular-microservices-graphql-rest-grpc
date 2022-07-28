@@ -1,0 +1,36 @@
+<form
+  #blogForm="ngForm"
+  (ngSubmit)="onCreatePost(blogForm)"
+  class="p-3 flex flex-col bg-blue-500 rounded-md text-white"
+>
+  <label for="tittle">Tittle</label>
+  <input
+    class="text-black rounded-sm px-1"
+    ngModel
+    type="text"
+    required
+    name="tittle"
+  />
+  <label for="url">Image Url</label>
+  <input 
+  ngModel
+  class="text-black rounded-sm px-1" 
+  type="text" 
+  required name="url" />
+  <label for="content">Content</label>
+  <textarea
+    class="text-black rounded-sm px-1"
+    id=""
+    required
+    ngModel
+    cols="30"
+    rows="5"
+    name="content"
+  ></textarea>
+  <button
+    [disabled]="!blogForm.valid"
+    class="bg-green-500 rounded-md mt-2 disabled:opacity-50"
+  >
+    New Post
+  </button>
+</form>

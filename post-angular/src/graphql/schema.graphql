@@ -1,0 +1,65 @@
+type Post {
+  id: String!
+  user: String!
+  content: Content!
+  date: String!
+}
+
+type AuthResponse {
+  token: String!
+  user: User!
+}
+
+type Content {
+  tittle: String!
+  body: String!
+  image: String!
+}
+
+type User {
+  id: String!
+  username: String!
+}
+
+input LoginInput {
+  username: String!
+  password: String!
+}
+
+input NewUser {
+  username: String!
+  password: String!
+}
+
+
+input NewContent {
+    tittle: String!
+    body: String!
+    image: String!
+}
+
+input NewPost {
+  user: String!
+  content: NewContent!
+}
+
+input UpdatePost {
+  id: String!
+  content: NewContent!
+}
+
+type Query {
+  posts: [Post!]!
+  post(id: String!): Post!
+  user(id: String!): User!
+}
+
+type Mutation {
+  signIn(input: NewUser): AuthResponse! 
+  login(input: LoginInput): AuthResponse! 
+  deleteUser(id: String!): User! 
+
+  createPost(input: NewPost!): Post! 
+  updatePost(input: UpdatePost!): Post! 
+  deletePost(id: String!): Post!
+}

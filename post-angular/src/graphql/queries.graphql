@@ -1,0 +1,32 @@
+query GetPosts {
+  posts {
+    id
+    user
+    content {
+      tittle
+      body
+      image
+    }
+    date
+  }
+}
+
+query GetPostById($postId: String!) {
+  post(id: $postId) {
+    id
+    user
+    content {
+      tittle
+      body
+      image
+    }
+    date
+  }
+}
+
+query GetUserById($userId: String!) {
+  user(id: $userId) {
+    id
+    username
+  }
+}

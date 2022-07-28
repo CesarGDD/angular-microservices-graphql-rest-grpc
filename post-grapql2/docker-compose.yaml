@@ -1,0 +1,21 @@
+version: '3'
+services:
+    node1:
+      image: couchbase
+      volumes:
+        - "~/couchbase/node1:/opt/couchbase/var"
+    node2:
+      image: couchbase
+      volumes:
+        - "~/couchbase/node2:/opt/couchbase/var"
+    node3:
+      image: couchbase
+      volumes:
+        - "~/couchbase/node3:/opt/couchbase/var"
+      ports:
+        - "8091-8097:8091-8097"
+        - "11210:11210"
+        - "11207:11207" 
+        - "18091-18095:18091-18095"
+        - "18096:18096"
+        - "18097:18097"

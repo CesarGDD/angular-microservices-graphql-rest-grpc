@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+package postspb;
+
+option go_package = "/postspb";
+
+message Content {
+    string tittle = 1;
+    string body = 2;
+    string image = 3;
+}
+
+message Post {
+    string id = 1;
+    string user = 2;
+    Content content = 3;
+    string date = 4;
+}
+
+message CreatePostRequest {
+    string user = 1;
+    Content content = 2;
+    string date = 3;
+}
+
+message CreatePostResponse {
+    Post post = 1;
+}
+
+message GetPostRequest {
+    string id = 1;
+}
+
+message GetPostResponse {
+    Post post = 1;
+}
+
+message UpdatePostRequest {
+    string id = 1;
+    Content content = 2;
+}
+
+message UpdatePostResponse {
+    Post post = 1;
+}
+
+message DeletePostRequest {
+    string id = 1;
+}
+
+message DeletePostResponse {
+    Post post = 1;
+}
+
+message GetPostsRequest {
+
+}
+
+message GetPostsResponse {
+    repeated Post post = 1;
+}
+
+
+service PostsService {
+    rpc CreatePost(CreatePostRequest) returns (CreatePostResponse);
+    rpc GetPost(GetPostRequest) returns (GetPostResponse);
+    rpc UpdatePost(UpdatePostRequest) returns (UpdatePostResponse);
+    rpc DeletePost(DeletePostRequest) returns (DeletePostResponse);
+    rpc GetPosts(GetPostsRequest) returns (GetPostsResponse);
+}

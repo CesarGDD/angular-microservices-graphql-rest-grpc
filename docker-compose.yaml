@@ -1,0 +1,51 @@
+version: "3.9"
+services:
+  couchbase:
+    image: couchbase
+    volumes:
+      - "~/couchbase/node1:/opt/couchbase/var"
+    ports:
+      - "8091-8097:8091-8097"
+      - "11210:11210"
+      - "11207:11207" 
+      - "18091-18095:18091-18095"
+      - "18096:18096"
+      - "18097:18097"
+  posts:
+    build: ./post-grpc
+    restart: always
+    ports:
+      - "50050:50050"
+    depends_on:
+      - couchbase
+    environment:
+      - COUCHBASE=couchbase
+  users:
+    build: ./users-grpc
+    restart: always
+    ports:
+      - "50051:50051"
+    depends_on:
+      - couchbase
+    environment:
+      - COUCHBASE=couchbase
+  graph-api:
+    build: ./graph-api
+    ports:
+      - "8080:8080"
+    depends_on: 
+      - posts
+    restart: always
+    environment:
+        POSTS_URL: posts:50050
+        USERS_URL: users:50051
+  rest-api:
+    build: ./rest-api
+    ports:
+      - '8081:8081'
+    volumes:
+      - ./rest-api:/app
+    environment:
+        POSTS_URL: posts:50050
+        USERS_URL: users:50051
+

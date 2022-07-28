@@ -1,0 +1,41 @@
+<div class="flex justify-center mt-3">
+  <form
+    #authForm="ngForm"
+    (ngSubmit)="auth(authForm)"
+    class="p-3 flex flex-col bg-blue-500 rounded-md text-white"
+    action=""
+  >
+    <label for="username">Username</label>
+    <input
+      class="text-black rounded-sm px-1"
+      ngModel
+      required
+      name="username"
+      type="text"
+    />
+    <label for="password">Password</label>
+    <input
+      class="text-black rounded-sm px-1"
+      ngModel
+      required
+      name="password"
+      type="password"
+    />
+    <!-- <label for="">Confirm Password</label>
+        <input class=" text-black rounded-sm px-1" type="password"> -->
+    <button
+      [disabled]="!authForm.valid"
+      class="bg-green-500 rounded-md mt-2 disabled:opacity-50"
+      type="submit"
+    >
+      {{ !newUser ? 'Login' : 'Signin'}}
+    </button>
+    <button
+        (click)="onSwichMode()"
+        type="button"
+      class="bg-green-500 rounded-md mt-2 disabled:opacity-50"
+    >
+      Switch to {{ !newUser ? 'Signin' : 'Login'}}
+    </button>
+  </form>
+</div>
